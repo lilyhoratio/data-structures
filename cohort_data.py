@@ -75,9 +75,7 @@ def sort_by_cohort(filename):
 
     all_students = [fall_15, winter_16, spring_16, summer_16, ghosts]
 
-
     return all_students
-
 
 def hogwarts_by_house(filename):
     """TODO: Sort students into lists by house and return all lists in one list.
@@ -135,6 +133,8 @@ def hogwarts_by_house(filename):
     dumbledores_army.sort()
     ghosts.sort()
     instructors.sort()
+
+    # all_hogwarts[0] = dumbledores_army.sort() not allowed!
 
     ## why doesn't sorting the lists within all_hogwarts list work? applying sorting method doesn't create new space in memory
     all_hogwarts = [dumbledores_army, gryffindor, hufflepuff, ravenclaw, slytherin, ghosts, instructors]
@@ -209,7 +209,7 @@ def find_cohort_by_student_name(student_list):
     return "Student not found."
 
 
-print(find_cohort_by_student_name(all_students_tuple_list('cohort_data.txt')))
+
 ##########################################################################################
 # Further Study Questions
 
@@ -226,9 +226,19 @@ def find_name_duplicates(filename):
 
     """
 
-    duplicate_names = set()
+    # duplicate_names = set()
 
-    # Code goes here
+    all_cohorts = sort_by_cohort(filename)
+
+    fall_15 = set(all_cohorts[0])
+    winter_16 = set(all_cohorts[1])
+    spring_16 = set(all_cohorts[2])
+    summer_16 = set(all_cohorts[3])
+    ghosts = set(all_cohorts[4])
+
+    print(fall_15)
+
+    duplicate_names = set(fall_15 & winter_16) # & spring_16 & summer_16 & ghosts)
 
     return duplicate_names
 
@@ -269,6 +279,8 @@ def find_house_members_by_student_name(student_list):
 
 # find_cohort_by_student_name(all_students_data)
 # find_house_members_by_student_name(all_students_data)
+# print(find_cohort_by_student_name(all_students_tuple_list('cohort_data.txt')))
+print(find_name_duplicates('cohort_data.txt'))
 
 
 ##############################################################################
